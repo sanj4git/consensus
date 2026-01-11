@@ -5,7 +5,7 @@ import { Card } from "../components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { api } from "../lib/api";
-import ForgotPasswordModal from "./ForgotPasswordModal"; 
+import ForgotPasswordModal from "./ForgotpasswordModal"; 
 
 export default function Login() {
   const { login } = useAuth();
