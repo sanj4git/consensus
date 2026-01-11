@@ -1,0 +1,703 @@
+/* =========================================
+   0. FONTS & IMPORTS
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
+:root {
+  /* Brand Colors - Vivid Orange & Deep Slate */
+  --primary: #f97316;       /* Orange 500 */
+  --primary-hover: #ea580c; /* Orange 600 */
+  --primary-gradient: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  --primary-light: #fff7ed; /* Orange 50 */
+  
+  /* Neutrals */
+  --bg-app: #f8fafc;        /* Slate 50 */
+  --bg-panel: #ffffff;      /* White */
+  --bg-sidebar: #f1f5f9;    /* Slate 100 */
+  
+  --text-main: #0f172a;     /* Slate 900 */
+  --text-muted: #64748b;    /* Slate 500 */
+  --text-light: #94a3b8;    /* Slate 400 */
+  --text-inverse: #ffffff;
+  
+  --border: #e2e8f0;        /* Slate 200 */
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+  --shadow-glow: 0 0 15px rgba(249, 115, 22, 0.3); /* Orange glow */
+  
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  --sidebar-width: 350px;
+  --header-height: 64px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px; /* Base size */
+}
+
+/* Elegant Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* =========================================
+   2. DASHBOARD LAYOUT
+   ========================================= */
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--bg-app);
+}
+
+/* =========================================
+   3. SIDEBAR (Modern & Minimal)
+   ========================================= */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.sidebar-header {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px;
+  font-weight: 800;
+  font-size: 1.25rem;
+  background: linear-gradient(90deg, #f97316, #db2777); /* Orange to Pink Text */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-bottom: 1px solid transparent; /* Cleaner look */
+}
+
+.sidebar-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 16px;
+}
+
+.sidebar-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+  margin-bottom: 12px;
+  font-weight: 700;
+  padding-left: 8px;
+}
+
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-sidebar);
+}
+
+/* Project Items */
+.project-wrapper {
+  margin-bottom: 6px;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.project-header:hover {
+  background-color: #e2e8f0; /* Darker hover for slate theme */
+  color: var(--text-main);
+}
+
+/* Active State */
+.project-header.bg-blue-50 {
+  background-color: white !important;
+  color: var(--primary) !important;
+  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+}
+
+.project-arrow {
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+.project-sublist {
+  padding-left: 14px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border-left: 2px solid var(--border);
+  margin-left: 14px;
+}
+
+.chat-item {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chat-item:hover {
+  color: var(--primary);
+  background-color: rgba(249, 115, 22, 0.05); /* Tinted background */
+}
+
+/* =========================================
+   4. CHAT WINDOW (Clean Canvas)
+   ========================================= */
+.chat-window {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--bg-panel);
+  background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+  background-size: 40px 40px; /* Subtle dot pattern */
+}
+
+/* Empty State */
+.chat-window.items-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--text-light);
+}
+.chat-window.items-center p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  background: white;
+  padding: 16px 24px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+.message-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .message-list {
+    padding: 1.5rem;
+  }
+}
+
+/* =========================================
+   5. MESSAGE BUBBLES (Premium Look)
+   ========================================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message-wrapper {
+  display: flex;
+  width: 100%;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.message-wrapper.user {
+  justify-content: flex-end;
+}
+
+.message-wrapper.bot {
+  justify-content: flex-start;
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 16px 22px;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  line-height: 1.6;
+  position: relative;
+  
+  /* Text Wrapping Logic */
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* User Bubble - Gradient & Shadow */
+.chat-bubble.user {
+  background: var(--primary-gradient);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+  border-bottom-right-radius: 4px;
+}
+
+/* Bot Bubble - Clean White Card */
+.chat-bubble.bot {
+  background-color: white;
+  color: var(--text-main);
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* "Thinking..." state */
+.chat-bubble.bot.italic {
+  font-style: normal;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.chat-bubble.bot.italic::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* =========================================
+   6. CHAT INPUT AREA (Floating Design)
+   ========================================= */
+.chat-input-area {
+  padding: 30px 10%;
+  background: transparent; /* Transparent so it floats over bg */
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .chat-input-area {
+    padding: 20px 16px;
+  }
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl); /* Very round corners */
+  padding: 12px;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.2s ease;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.input-container:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1), var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.textarea-field {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 8px 12px;
+  min-height: 50px;
+  max-height: 200px;
+  background: transparent;
+  color: var(--text-main);
+}
+.textarea-field::placeholder {
+  color: var(--text-light);
+}
+
+.input-container button {
+  align-self: flex-end;
+  border-radius: 20px; /* Pill shape button */
+}
+
+/* =========================================
+   7. AUTH PAGES (Login/Register)
+   ========================================= */
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* Abstract modern background */
+  background: radial-gradient(circle at 10% 20%, rgb(255, 247, 237) 0%, rgb(255, 252, 246) 90%);
+  padding: 20px;
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 420px;
+  padding: 48px;
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.1); /* Deep shadow */
+  border: 1px solid white;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0 0 12px 0;
+  color: var(--text-main);
+  letter-spacing: -0.03em;
+}
+
+.auth-header p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.auth-footer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* =========================================
+   8. COMPONENTS (Buttons, Inputs)
+   ========================================= */
+
+/* Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  height: 44px; /* Taller touch targets */
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  outline: none;
+  letter-spacing: 0.01em;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+.btn-primary {
+  background: var(--primary);
+  background: var(--primary-gradient);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.3);
+}
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 8px -1px rgba(249, 115, 22, 0.4);
+}
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background-color: white;
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  box-shadow: var(--shadow-sm);
+}
+.btn-outline:hover:not(:disabled) {
+  border-color: var(--text-muted);
+  background-color: var(--bg-app);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-muted);
+}
+.btn-ghost:hover:not(:disabled) {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+}
+
+.btn-logout {
+  color: #ef4444; 
+  font-weight: 600;
+}
+.btn-logout:hover {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+/* Inputs */
+.input-field {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+}
+
+.input-field:focus {
+  border-color: var(--primary);
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+}
+
+/* Card */
+.card {
+  background: var(--bg-panel);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+
+/* =========================================
+   9. UTILITY & OVERRIDES
+   ========================================= */
+.w-full { width: 100%; }
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.font-semibold { font-weight: 600; }
+.uppercase { text-transform: uppercase; }
+.truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.flex { display: flex; }
+.gap-2 { gap: 0.5rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.pl-2 { padding-left: 0.5rem; }
+.p-2 { padding: 0.5rem; }
+.h-7 { height: 1.75rem; }
+.h-8 { height: 2rem; }
+
+/* --- LAYOUTS --- */
+
+/* Auth Pages (Login/Register) */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-app);
+  padding: 20px;
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 32px;
+  background: white;
+}
+
+/* --- BRANDING STYLES --- */
+
+.brand-section {
+  text-align: center;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+/* New Image Style */
+.brand-logo-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.brand-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.brand-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* --- MODAL STYLES --- */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it sits on top of everything */
+  backdrop-filter: blur(2px); /* Optional: slight blur effect */
+}
+
+.modal-box {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+.modal-close-btn:hover {
+  color: #1e293b;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Sidebar Create Form --- */
+
+.create-project-form {
+  padding: 10px;
+  border: 1px solid #dbeafe; /* Blue-100 */
+  background-color: #eff6ff; /* Blue-50 */
+  border-radius: 8px;
+  margin: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Dropdown Style */
+.select-field {
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #334155;
+  background-color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+.select-field:focus {
+  border-color: #2563eb;
+}
